@@ -1,0 +1,13 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="convertor" extends="struts-default">
+
+	<action name="convertor"  class="com.convertor.ConvertorAction" method="convert">
+	<result name="input">/convertor.jsp</result>
+	<result name="success">/convertorSuccess.jsp</result>
+	</action>
+
+</package>
+</struts>

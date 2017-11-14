@@ -1,0 +1,16 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+<package name="book" extends="struts-default">
+
+<action name="*Book"  class="com.action.BookAction" method="{1}">
+<result>/successBook.jsp</result>
+<result name="input">/initAddBook.jsp</result>
+<result name="list">/listBook.jsp</result>
+<result name="{1}">/{1}Book.jsp</result>
+</action>
+
+</package>
+</struts>

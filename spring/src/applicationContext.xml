@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd"> 
+
+	<bean id="hw" class="com.springtest1.HelloWorld" > </bean>
+    <bean id="user" class="cn.itcast01.User" init-method="init_user" destroy-method="destroy_user" scope="singleton" lazy-init="false"></bean>
+	 
+	
+	<bean id="userDao" class="com.springtest1.dao.UserDaoImpl"></bean>
+	
+	<bean id="userBiz" class="com.springtest1.biz.UserBizImpl">
+		<property name="userDao" ref="userDao"></property>
+	
+	</bean>
+	<bean id="logAdvice" class="com.springtest1.aop.LogAdvice"></bean>
+	<bean id="afterLogAdvice" class="com.springtest1.aop.AfterLogAdvice"></bean>
+	<bean id="throwsLogAdvice" class="com.springtest1.aop.ThrowsLogAdvice"></bean>
+	<bean id="logAroundAdvice" class="com.springtest1.aop.LogAroundAdvice"></bean>
+	<bean id="ub" class="org.springframework.aop.framework.ProxyFactoryBean" >
+		<property name="proxyInterfaces">
+			<value>com.springtest1.biz.UserBiz</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<!-- 前置通知 -->
+				<value>logAdvice</value>
+				<!-- 后置通知 -->
+				<value>afterLogAdvice</value>
+				<!-- 异常通知 -->
+				<value>throwsLogAdvice</value>
+				<!-- 环绕通知 -->
+			    <value>logAroundAdvice</value>
+			</list>
+		</property>
+		<property name="target" ref="userBiz"></property>
+	</bean>
+</beans>
